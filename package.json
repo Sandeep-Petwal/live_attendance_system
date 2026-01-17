@@ -1,0 +1,24 @@
+{
+  "name": "live_attendance_system",
+  "version": "1.0.0",
+  "description": "Assigment without ai",
+  "main": "index.js",
+  "scripts": {
+    "start" : "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sandeep-Petwal/live_attendance_system.git"
+  },
+  "author": "Sandeep Prasad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sandeep-Petwal/live_attendance_system/issues"
+  },
+  "homepage": "https://github.com/Sandeep-Petwal/live_attendance_system#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.4"
+  }
+}
