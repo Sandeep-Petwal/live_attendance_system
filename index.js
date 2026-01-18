@@ -1,4 +1,6 @@
 const express = require('express')
+const cookieParser = require('cookie-parser');
+
 const router = require('./src/routes/routes')
 const { errorHandlerMiddleware } = require('./src/middlewares/asyncHandler')
 const connectMongodb = require('./src/db/db')
@@ -8,8 +10,13 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 
+// Parse JSON bodies
+app.use(express.json());
+app.use(cookieParser());
+
+
 // Main Router, and global async error handler
-app.use("/api", router)
+app.use("/", router)
 app.use(errorHandlerMiddleware);
 
 // Database connection

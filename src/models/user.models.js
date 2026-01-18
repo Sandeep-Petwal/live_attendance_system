@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -17,7 +17,7 @@ const userSchema = new Schema({
     role: {
         type: String,
         required: true,
-        ref : "User",
+        ref: "User",
         enum: {
             values: ['teacher', 'student'],
             message: '{VALUE} is not a valid role'
@@ -25,4 +25,13 @@ const userSchema = new Schema({
     }
 });
 
-export const User = mongoose.model("user", userSchema);
+
+// Statics
+userSchema.statics.findByEmail = (email) => {
+    return this.find({ email });
+}
+
+
+
+const User = mongoose.model("user", userSchema);
+module.exports = User
