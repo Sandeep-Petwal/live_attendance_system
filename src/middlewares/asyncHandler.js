@@ -10,7 +10,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
 
     if (err instanceof ZodError) {
         console.log(
-            "❌ Zod Error at :", req.path,
+            "❌ Zod Error at :", req.path,  
         );
 
 

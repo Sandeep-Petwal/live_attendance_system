@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { userProfileSchema } = require('../routes/zodSchemas');
+const { userAuthSchema } = require('../routes/zodSchemas');
 const jwtSecret = process.env.JWT_SECRET || 'verystrongsecret'
 
 
@@ -17,7 +17,7 @@ const authMiddleware = async (req, res, next) => {
     // Verify JWT token
     const user = jwt.verify(token, jwtSecret);
     const { userId, role } = user;
-    userProfileSchema.parse({
+    userAuthSchema.parse({
         userId,
         role
     })

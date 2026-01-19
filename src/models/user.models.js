@@ -28,7 +28,7 @@ const userSchema = new Schema({
 
 // Statics
 userSchema.statics.findByEmail = (email) => {
-    return this.find({ email });
+    return this.findOne({ email });
 }
 
 
