@@ -128,9 +128,19 @@ const getClass = async (req, res) => {
 }
 
 
+//  GET /class/:id/my-attendance
+// **Auth Required:** Yes (Student only, must be enrolled in class)
+// Note: Check MongoDB Attendance collection for persisted record
+const getMyAttendance = async(req, res) => {
+    
+}
+
+
+
 
 module.exports = {
     createClass,
     addStudentToClass,
-    getClass
+    getClass,
+    getMyAttendance
 }

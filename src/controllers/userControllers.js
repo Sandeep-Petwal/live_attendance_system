@@ -138,12 +138,36 @@ const getOwnProfile = async (req, res) => {
 }
 
 
+// ### 7. GET /students
+// **Auth Required:** Yes (Teacher only)
+// Note: Returns all users with role "student"
+
+const getAllStudents = async(req, res) => {
+
+    const role = req.role;
+    if (role !== 'teacher') {
+        return res.status(403).json({ success: false, error: "Forbidden, teacher access required" });
+    }
+
+    const allStudents = await User.find({
+        role: 'student'
+    })
+
+    return res.status(200).json({
+        success: true,
+        data: allStudents
+    });
+
+
+}
+
 
 
 
 module.exports = {
     signUp,
-    login, 
+    login,
     logout,
-    getOwnProfile
+    getOwnProfile,
+    getAllStudents
 }

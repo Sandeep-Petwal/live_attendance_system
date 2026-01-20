@@ -9,7 +9,7 @@ const { asyncErrorHandler: catchErrors } = require('../middlewares/asyncHandler'
 const User = require("../models/user.models");
 const { userSignUpSchema, userLoginSchema } = require('./zodSchemas');
 const authMiddleware = require('../middlewares/auth');
-const { signUp, login, logout, getOwnProfile } = require("../controllers/userControllers");
+const { signUp, login, logout, getOwnProfile, getAllStudents } = require("../controllers/userControllers");
 
 
 
@@ -23,15 +23,17 @@ userRoutes.post("/auth/login", login)
 
 
 // Logout
-userRoutes.post("/auth/logout", authMiddleware, logout);
+userRoutes.post("/auth/logout", logout);
 
 
 // Me
 userRoutes.get("/auth/me", authMiddleware, getOwnProfile)
 
 
-
-
+// GET /students
+// **Auth Required:** Yes (Teacher only)
+// Note: Returns all users with role "student"
+userRoutes.get("/students", authMiddleware, getAllStudents)
 
 
 
