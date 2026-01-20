@@ -25,4 +25,16 @@ router.use("/", userRoutes)
 router.use("/",classRoutes)
 
 
+// THE 404 CATCH-ALL MIDDLEWARE (MUST BE LAST)
+router.use((req, res, next) => {
+    return res.status(404).json({
+        success : false,
+        data : {
+            message : "Path not found"
+        }
+    })
+  });
+  
+
+
 module.exports = router;

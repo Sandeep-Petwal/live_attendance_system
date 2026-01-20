@@ -10,11 +10,16 @@ const classSchema = new Schema({
     teacherId: {
         type: ObjectId,
         required: true,
-        ref : "User"
+        ref: "User"
     },
-    studentIds: [ObjectId]
+    studentIds: {
+        type: [{
+            type: ObjectId,
+            ref: "User"
+        }]
+    }
 })
 
 
-const Class = mongoose.model("class", classSchema)
+const Class = mongoose.model("Class", classSchema)
 module.exports = Class

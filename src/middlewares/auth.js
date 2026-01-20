@@ -7,6 +7,11 @@ const jwtSecret = process.env.JWT_SECRET || 'verystrongsecret'
 const authMiddleware = async (req, res, next) => {
     const cookies = req.cookies;
     const token = cookies.token;
+
+    console.log('\n authMiddleware cookies', cookies)
+    console.log('token', token)
+
+
     if (!token) {
         return res.status(401).json({
             success: false,
