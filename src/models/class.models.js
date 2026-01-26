@@ -7,7 +7,7 @@ const classSchema = new Schema({
         type: String,
         required: true
     },
-    teacherId: {
+    teacherId: { 
         type: ObjectId,
         required: true,
         ref: "User"

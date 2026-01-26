@@ -27,10 +27,10 @@ const userSchema = new Schema({
 
 
 // Statics
-userSchema.statics.findByEmail = (email) => {
+userSchema.statics.findByEmail = function (email) {
     return this.findOne({ email });
-}
-
+  };
+  
 
 
 const User = mongoose.model("User", userSchema);

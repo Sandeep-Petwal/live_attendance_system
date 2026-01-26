@@ -3,7 +3,7 @@ const authMiddleware = require("../middlewares/auth");
 const { classSchema, addStudentShema } = require("./zodSchemas");
 const classRoutes = express.Router();
 const Class = require("../models/class.models");
-const { createClass, addStudentToClass, getClass, getMyAttendance } = require("../controllers/classControllers");
+const { createClass, addStudentToClass, getClass, getMyAttendance, startAttendanceSession, clearAttendaceSession } = require("../controllers/classControllers");
 
 
 
@@ -25,6 +25,15 @@ classRoutes.get("/class/:id", authMiddleware, getClass)
 // Note: Check MongoDB Attendance collection for persisted record
 classRoutes.get("/class/:id/my-attendance", authMiddleware, getMyAttendance)
 
+
+// ### 9. POST /attendance/start
+// **Auth Required:** Yes (Teacher only, must own the class)
+// Purpose: Starts a new attendance session. Sets the active class in memory. Only one session can be active at a time.
+classRoutes.post("/attendance/start", authMiddleware, startAttendanceSession);
+
+
+// Clear attendance session
+classRoutes.post("/attendance/clear", authMiddleware, clearAttendaceSession);
 
 
 module.exports = classRoutes;

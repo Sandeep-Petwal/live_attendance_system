@@ -8,16 +8,14 @@ const authMiddleware = async (req, res, next) => {
     const cookies = req.cookies;
     const token = cookies.token;
 
-    console.log('\n authMiddleware cookies', cookies)
-    console.log('token', token)
-
-
     if (!token) {
         return res.status(401).json({
             success: false,
             error: "Unauthorized, token missing or invalid"
         })
     }
+
+    console.log('token', token)
 
     // Verify JWT token
     const user = jwt.verify(token, jwtSecret);

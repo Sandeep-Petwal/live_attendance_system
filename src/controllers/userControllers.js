@@ -151,7 +151,7 @@ const getAllStudents = async(req, res) => {
 
     const allStudents = await User.find({
         role: 'student'
-    })
+    }).select('-password -role')
 
     return res.status(200).json({
         success: true,
@@ -160,7 +160,6 @@ const getAllStudents = async(req, res) => {
 
 
 }
-
 
 
 

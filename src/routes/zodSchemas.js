@@ -26,10 +26,18 @@ const classSchema = z.object({
     role: z.enum(['teacher'])
 })
 
-const addStudentShema= z.object({
-    studentId : z.string()
+const addStudentShema = z.object({
+    studentId: z.string()
 })
 
+
+const getMyAttendanceSchema = z.object({
+    classId: z.string()
+})
+
+const startAttendanceSchema = z.object({
+    classId: z.string()
+})
 
 
 
@@ -39,5 +47,7 @@ module.exports = {
     userLoginSchema,
     userAuthSchema,
     classSchema,
-    addStudentShema
+    addStudentShema,
+    getMyAttendanceSchema,
+    startAttendanceSchema
 }

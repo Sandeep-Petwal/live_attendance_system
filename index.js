@@ -1,35 +1,34 @@
-const express = require('express')
+const express = require('express');
+const http = require('http');
 const cookieParser = require('cookie-parser');
 
-const router = require('./src/routes/routes')
-const { errorHandlerMiddleware } = require('./src/middlewares/asyncHandler')
-const connectMongodb = require('./src/db/db')
-require('dotenv').config()
-const app = express()
+const socketHandler = require("./src/websocket/socketHandler");
+const router = require('./src/routes/routes');
+const { errorHandlerMiddleware } = require('./src/middlewares/asyncHandler');
+const connectMongodb = require('./src/db/db');
 
-const PORT = process.env.PORT || 3000
+require('dotenv').config();
 
+const app = express();
+const server = http.createServer(app);
 
-// Parse JSON bodies
+const PORT = process.env.PORT || 3000;
+
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
 
-
-// Main Router, and global async error handler
-app.use("/", router)
+// Routes
+app.use("/", router);
 app.use(errorHandlerMiddleware);
 
-// Database connection
-connectMongodb().catch(err => {
-    console.log("Error in mongodb connection : ", err);
-    
-})
+// WebSocket
+socketHandler(server);
 
+// DB
+connectMongodb().catch(console.error);
 
-app.listen(3000, () => {
-    console.log(`Server is running on http://localhost:${PORT}`)
-})
-
-
-
-module.exports = { app }
+// Start server
+server.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
